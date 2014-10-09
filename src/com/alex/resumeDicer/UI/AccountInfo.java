@@ -63,7 +63,7 @@ public class AccountInfo extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				val accountInfo = (AccountInfo) ((Control) event.getSource()).getParent();
-				val accountsList = (AccountsEmbedder) accountInfo.getParent();
+				val accountsList = (AccountsList) accountInfo.getParent();
 				accountsList.removeAccountInfo(accountInfo);
 			}
 		});
