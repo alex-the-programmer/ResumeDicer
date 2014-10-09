@@ -1,9 +1,9 @@
 package com.alex.resumeDicer.UI;
 
-import lombok.Getter;
 import lombok.val;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
@@ -17,10 +17,8 @@ import org.eclipse.swt.widgets.ProgressBar;
 import com.alex.resumeDicer.Model.AccountInfoModel;
 
 public class AccountsEmbedder extends Composite {
-
-	@Getter
-	private AccountsList accountsList;
 	private Button image;
+	private AccountsList accountsList;
 
 	/**
 	 * Create the composite.
@@ -40,44 +38,50 @@ public class AccountsEmbedder extends Composite {
 		fd_image.left = new FormAttachment(0, 10);
 		image.setLayoutData(fd_image);
 
-		Button btnNewButton = new Button(this, SWT.NONE);
-		btnNewButton.addSelectionListener(new SelectionAdapter() {
+		Button btnAddAccount = new Button(this, SWT.NONE);
+		btnAddAccount.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
-				val accountsList = ((AccountsEmbedder) ((Control) event.getSource()).getParent()).getAccountsList();
+				val accountsList = ((AccountsEmbedder) ((Control) event.getSource()).getParent()).accountsList;
 				accountsList.addAccountInfoModel(new AccountInfoModel());
 			}
 		});
-		FormData fd_btnNewButton = new FormData();
-		fd_btnNewButton.bottom = new FormAttachment(image, 0, SWT.BOTTOM);
-		fd_btnNewButton.right = new FormAttachment(100, -10);
-		btnNewButton.setLayoutData(fd_btnNewButton);
-		btnNewButton.setText("Add account");
+		FormData fd_btnAddAccount = new FormData();
+		fd_btnAddAccount.bottom = new FormAttachment(image, 0, SWT.BOTTOM);
+		fd_btnAddAccount.right = new FormAttachment(100, -10);
+		btnAddAccount.setLayoutData(fd_btnAddAccount);
+		btnAddAccount.setText("Add account");
 
-		accountsList = new AccountsList(this, SWT.NONE);
-		FormData fd_accountsList = new FormData();
-		fd_accountsList.bottom = new FormAttachment(image, 333, SWT.BOTTOM);
-		fd_accountsList.right = new FormAttachment(btnNewButton, 0, SWT.RIGHT);
-		fd_accountsList.top = new FormAttachment(image, 6);
-		fd_accountsList.left = new FormAttachment(image, 0, SWT.LEFT);
-		accountsList.setLayoutData(fd_accountsList);
+		ScrolledComposite scrolledComposite = new ScrolledComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		FormData fd_scrolledComposite = new FormData();
+		fd_scrolledComposite.right = new FormAttachment(100, -10);
+		fd_scrolledComposite.top = new FormAttachment(image, 6);
+		fd_scrolledComposite.left = new FormAttachment(image, 0, SWT.LEFT);
+		scrolledComposite.setLayoutData(fd_scrolledComposite);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
 
 		ProgressBar progressBar = new ProgressBar(this, SWT.NONE);
 		progressBar.setEnabled(false);
 		FormData fd_progressBar = new FormData();
-		fd_progressBar.right = new FormAttachment(btnNewButton, 0, SWT.RIGHT);
+		fd_progressBar.right = new FormAttachment(btnAddAccount, 0, SWT.RIGHT);
 		fd_progressBar.bottom = new FormAttachment(100, -10);
 		fd_progressBar.left = new FormAttachment(0, 10);
 		progressBar.setLayoutData(fd_progressBar);
 
-		Button btnNewButton_1 = new Button(this, SWT.NONE);
-		btnNewButton_1.setEnabled(false);
-		FormData fd_btnNewButton_1 = new FormData();
-		fd_btnNewButton_1.right = new FormAttachment(btnNewButton, 0, SWT.RIGHT);
-		fd_btnNewButton_1.top = new FormAttachment(accountsList, 6);
-		fd_btnNewButton_1.left = new FormAttachment(0, 10);
-		btnNewButton_1.setLayoutData(fd_btnNewButton_1);
-		btnNewButton_1.setText("Run update");
+		Button btnRunUpdate = new Button(this, SWT.NONE);
+		fd_scrolledComposite.bottom = new FormAttachment(btnRunUpdate, -6);
+
+		accountsList = new AccountsList(scrolledComposite, SWT.NONE);
+		scrolledComposite.setContent(accountsList);
+		scrolledComposite.setMinSize(accountsList.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		btnRunUpdate.setEnabled(false);
+		FormData fd_btnRunUpdate = new FormData();
+		fd_btnRunUpdate.top = new FormAttachment(image, 339);
+		fd_btnRunUpdate.right = new FormAttachment(btnAddAccount, 0, SWT.RIGHT);
+		fd_btnRunUpdate.left = new FormAttachment(0, 10);
+		btnRunUpdate.setLayoutData(fd_btnRunUpdate);
+		btnRunUpdate.setText("Run update");
 
 	}
 

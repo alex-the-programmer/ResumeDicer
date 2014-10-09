@@ -10,7 +10,7 @@ import lombok.NonNull;
 import lombok.val;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.alex.resumeDicer.Model.AccountInfoModel;
@@ -27,7 +27,7 @@ public class AccountsList extends Composite {
 	 */
 	public AccountsList(Composite parent, int style) {
 		super(parent, SWT.BORDER | SWT.V_SCROLL);
-		setLayout(new FillLayout(SWT.VERTICAL));
+		setLayout(new StackLayout());
 	}
 
 	@Override
