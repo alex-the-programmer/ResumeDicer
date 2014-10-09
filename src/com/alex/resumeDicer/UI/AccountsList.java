@@ -12,7 +12,7 @@ public class AccountsList extends Composite {
 	 * @param style
 	 */
 	public AccountsList(Composite parent, int style) {
-		super(parent, SWT.V_SCROLL);
+		super(parent, SWT.BORDER | SWT.V_SCROLL);
 		setLayout(new StackLayout());
 
 	}
