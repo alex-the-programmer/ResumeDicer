@@ -52,9 +52,11 @@ public class AccountsList extends Composite {
 		val accountInfo = new AccountInfo(this, SWT.NONE);
 		accountInfo.setAccountInfo(model);
 		accounts.add(accountInfo);
+		layout(true);
 	}
 
 	public void removeAccountInfo(@NonNull AccountInfo accountInfo) {
 		accounts.remove(accountInfo);
+		layout(true);
 	}
 }

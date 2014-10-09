@@ -10,6 +10,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
@@ -61,7 +62,7 @@ public class AccountInfo extends Composite {
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
-				val accountInfo = (AccountInfo) ((Composite) event.getSource()).getParent();
+				val accountInfo = (AccountInfo) ((Control) event.getSource()).getParent();
 				val accountsList = (AccountsList) accountInfo.getParent();
 				accountsList.removeAccountInfo(accountInfo);
 			}
@@ -80,6 +81,9 @@ public class AccountInfo extends Composite {
 	}
 
 	public void setAccountInfo(AccountInfoModel model) {
+		if (model == null || model.getEmailAdress() == null || model.getPassword() == null)
+			return;
+
 		this.emailAddress.setText(model.getEmailAdress());
 		this.password.setText(model.getPassword());
 	}

@@ -11,8 +11,8 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.ProgressBar;
-import org.eclipse.wb.swt.SWTResourceManager;
 
 import com.alex.resumeDicer.Model.AccountInfoModel;
 
@@ -44,7 +44,7 @@ public class AccountsEmbedder extends Composite {
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
-				val accountsList = ((AccountsEmbedder) ((Composite) event.getSource()).getParent()).getAccountsList();
+				val accountsList = ((AccountsEmbedder) ((Control) event.getSource()).getParent()).getAccountsList();
 				accountsList.addAccountInfoModel(new AccountInfoModel());
 			}
 		});
@@ -87,6 +87,6 @@ public class AccountsEmbedder extends Composite {
 	}
 
 	public void setLogoImage(String imagePath) {
-		image.setImage(SWTResourceManager.getImage(imagePath));
+		// image.setImage(new );
 	}
 }
