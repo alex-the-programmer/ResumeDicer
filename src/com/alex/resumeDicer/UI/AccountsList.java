@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.activity.InvalidActivityException;
 
+import lombok.NonNull;
 import lombok.val;
 
 import org.eclipse.swt.SWT;
@@ -51,5 +52,9 @@ public class AccountsList extends Composite {
 		val accountInfo = new AccountInfo(this, SWT.NONE);
 		accountInfo.setAccountInfo(model);
 		accounts.add(accountInfo);
+	}
+
+	public void removeAccountInfo(@NonNull AccountInfo accountInfo) {
+		accounts.remove(accountInfo);
 	}
 }

@@ -46,6 +46,7 @@ public class AppWindow {
 
 		TabItem tbtmDice = new TabItem(tabFolder, SWT.NONE);
 		AccountsEmbedder diceAccountEmbedder = new AccountsEmbedder(tabFolder, SWT.NONE);
+		diceAccountEmbedder.setLogoImage("Dice.png");
 		tbtmDice.setControl(diceAccountEmbedder);
 		tbtmDice.setText("Dice");
 

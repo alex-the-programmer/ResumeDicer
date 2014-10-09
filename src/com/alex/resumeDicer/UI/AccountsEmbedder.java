@@ -1,15 +1,26 @@
 package com.alex.resumeDicer.UI;
 
+import lombok.Getter;
+import lombok.val;
+
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import com.alex.resumeDicer.Model.AccountInfoModel;
 
 public class AccountsEmbedder extends Composite {
+
+	@Getter
+	private AccountsList accountsList;
+	private Button image;
 
 	/**
 	 * Create the composite.
@@ -20,27 +31,35 @@ public class AccountsEmbedder extends Composite {
 		super(parent, style);
 		setLayout(new FormLayout());
 
-		Canvas canvas = new Canvas(this, SWT.NONE);
-		FormData fd_canvas = new FormData();
-		fd_canvas.bottom = new FormAttachment(0, 113);
-		fd_canvas.right = new FormAttachment(0, 450);
-		fd_canvas.top = new FormAttachment(0, 10);
-		fd_canvas.left = new FormAttachment(0, 10);
-		canvas.setLayoutData(fd_canvas);
+		image = new Button(this, SWT.FLAT);
+		image.setEnabled(false);
+		FormData fd_image = new FormData();
+		fd_image.bottom = new FormAttachment(0, 113);
+		fd_image.right = new FormAttachment(0, 450);
+		fd_image.top = new FormAttachment(0, 10);
+		fd_image.left = new FormAttachment(0, 10);
+		image.setLayoutData(fd_image);
 
 		Button btnNewButton = new Button(this, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+				val accountsList = ((AccountsEmbedder) ((Composite) event.getSource()).getParent()).getAccountsList();
+				accountsList.addAccountInfoModel(new AccountInfoModel());
+			}
+		});
 		FormData fd_btnNewButton = new FormData();
-		fd_btnNewButton.bottom = new FormAttachment(canvas, 0, SWT.BOTTOM);
+		fd_btnNewButton.bottom = new FormAttachment(image, 0, SWT.BOTTOM);
 		fd_btnNewButton.right = new FormAttachment(100, -10);
 		btnNewButton.setLayoutData(fd_btnNewButton);
 		btnNewButton.setText("Add account");
 
-		AccountsList accountsList = new AccountsList(this, SWT.NONE);
+		accountsList = new AccountsList(this, SWT.NONE);
 		FormData fd_accountsList = new FormData();
-		fd_accountsList.bottom = new FormAttachment(canvas, 333, SWT.BOTTOM);
+		fd_accountsList.bottom = new FormAttachment(image, 333, SWT.BOTTOM);
 		fd_accountsList.right = new FormAttachment(btnNewButton, 0, SWT.RIGHT);
-		fd_accountsList.top = new FormAttachment(canvas, 6);
-		fd_accountsList.left = new FormAttachment(canvas, 0, SWT.LEFT);
+		fd_accountsList.top = new FormAttachment(image, 6);
+		fd_accountsList.left = new FormAttachment(image, 0, SWT.LEFT);
 		accountsList.setLayoutData(fd_accountsList);
 
 		ProgressBar progressBar = new ProgressBar(this, SWT.NONE);
@@ -65,5 +84,9 @@ public class AccountsEmbedder extends Composite {
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+
+	public void setLogoImage(String imagePath) {
+		image.setImage(SWTResourceManager.getImage(imagePath));
 	}
 }

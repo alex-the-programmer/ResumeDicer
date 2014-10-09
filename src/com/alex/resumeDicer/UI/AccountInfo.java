@@ -1,6 +1,10 @@
 package com.alex.resumeDicer.UI;
 
+import lombok.val;
+
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -54,6 +58,14 @@ public class AccountInfo extends Composite {
 		password.setLayoutData(fd_password);
 
 		Button btnNewButton = new Button(this, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+				val accountInfo = (AccountInfo) ((Composite) event.getSource()).getParent();
+				val accountsList = (AccountsList) accountInfo.getParent();
+				accountsList.removeAccountInfo(accountInfo);
+			}
+		});
 		FormData fd_btnNewButton = new FormData();
 		fd_btnNewButton.top = new FormAttachment(emailAddress, -2, SWT.TOP);
 		fd_btnNewButton.left = new FormAttachment(password, 6);
