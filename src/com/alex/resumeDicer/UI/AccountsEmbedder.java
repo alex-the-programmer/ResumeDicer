@@ -12,6 +12,7 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 
 import com.alex.resumeDicer.Model.AccountInfoModel;
@@ -54,8 +55,8 @@ public class AccountsEmbedder extends Composite {
 
 		ScrolledComposite scrolledComposite = new ScrolledComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		FormData fd_scrolledComposite = new FormData();
-		fd_scrolledComposite.right = new FormAttachment(100, -10);
 		fd_scrolledComposite.top = new FormAttachment(image, 6);
+		fd_scrolledComposite.right = new FormAttachment(100, -10);
 		fd_scrolledComposite.left = new FormAttachment(image, 0, SWT.LEFT);
 		scrolledComposite.setLayoutData(fd_scrolledComposite);
 		scrolledComposite.setExpandHorizontal(true);
@@ -77,11 +78,47 @@ public class AccountsEmbedder extends Composite {
 		scrolledComposite.setMinSize(accountsList.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		btnRunUpdate.setEnabled(false);
 		FormData fd_btnRunUpdate = new FormData();
+		fd_btnRunUpdate.left = new FormAttachment(btnAddAccount, 0, SWT.LEFT);
 		fd_btnRunUpdate.top = new FormAttachment(image, 339);
 		fd_btnRunUpdate.right = new FormAttachment(btnAddAccount, 0, SWT.RIGHT);
-		fd_btnRunUpdate.left = new FormAttachment(0, 10);
 		btnRunUpdate.setLayoutData(fd_btnRunUpdate);
 		btnRunUpdate.setText("Run update");
+
+		Label lblBrowser = new Label(this, SWT.NONE);
+		FormData fd_lblBrowser = new FormData();
+		fd_lblBrowser.top = new FormAttachment(scrolledComposite, 6);
+		fd_lblBrowser.left = new FormAttachment(image, 0, SWT.LEFT);
+		lblBrowser.setLayoutData(fd_lblBrowser);
+		lblBrowser.setText("Browser:");
+
+		Button btnChrome = new Button(this, SWT.RADIO);
+		btnChrome.setSelection(true);
+		FormData fd_btnChrome = new FormData();
+		fd_btnChrome.top = new FormAttachment(lblBrowser, 6);
+		fd_btnChrome.left = new FormAttachment(0, 10);
+		btnChrome.setLayoutData(fd_btnChrome);
+		btnChrome.setText("Chrome");
+
+		Button btnFirefox = new Button(this, SWT.RADIO);
+		FormData fd_btnFirefox = new FormData();
+		fd_btnFirefox.left = new FormAttachment(btnChrome, 5);
+		fd_btnFirefox.top = new FormAttachment(btnChrome, 0, SWT.TOP);
+		btnFirefox.setLayoutData(fd_btnFirefox);
+		btnFirefox.setText("Firefox");
+
+		Button btnSafari = new Button(this, SWT.RADIO);
+		FormData fd_btnSafari = new FormData();
+		fd_btnSafari.top = new FormAttachment(btnChrome, 0, SWT.TOP);
+		fd_btnSafari.left = new FormAttachment(btnFirefox, 6);
+		btnSafari.setLayoutData(fd_btnSafari);
+		btnSafari.setText("Safari");
+
+		Button btnInternetexplorer = new Button(this, SWT.RADIO);
+		FormData fd_btnInternetexplorer = new FormData();
+		fd_btnInternetexplorer.top = new FormAttachment(btnChrome, 0, SWT.TOP);
+		fd_btnInternetexplorer.left = new FormAttachment(btnSafari, 6);
+		btnInternetexplorer.setLayoutData(fd_btnInternetexplorer);
+		btnInternetexplorer.setText("InternetExplorer");
 
 	}
 
